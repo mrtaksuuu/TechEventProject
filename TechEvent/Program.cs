@@ -1,5 +1,4 @@
 ﻿using System;
-using TechEvent.Concrete;
 
 namespace TechEvent
 {
@@ -7,8 +6,13 @@ namespace TechEvent
     {
         static void Main(string[] args)
         {
+
+
+
+
             TechEventApp app = new TechEventApp();
             app.Start();
+
 
             Console.ReadKey();
         }

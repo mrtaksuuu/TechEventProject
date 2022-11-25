@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
+using TechEvent.Concrete;
 
-namespace TechEvent.Concrete
+namespace TechEvent
 {
     internal class TechEventApp
     {
+        private Katilimci katilimci;
+
         public void Start()
         {
             Console.WriteLine("TechEvent uygulamasına hoş geldiniz.");
@@ -39,7 +42,7 @@ namespace TechEvent.Concrete
                 Console.WriteLine("1. Etkinlik Oluştur");
                 Console.WriteLine("2. Etkinliğe Katıl");
                 Console.WriteLine("3. Bilet Al");
-                Console.WriteLine("4. Hesabini Kapat");
+                Console.WriteLine("4. Etkinlikleri Görüntüle");
 
                 int y = int.Parse(Console.ReadLine());
                 switch (y)
@@ -54,7 +57,7 @@ namespace TechEvent.Concrete
                         Sale(user);
                         break;
                     case 4:
-                        user.HesapKapatma(user.kAdi, TechEventHelper.kullaniciListesi);
+                        OrnekEtkinlik(((Katilimci)katilimci));
                         break;
                     default:
                         break;
@@ -105,7 +108,7 @@ namespace TechEvent.Concrete
             }
         }
 
-        void Create(TechEventKullanici user)
+        void Create(TechEventKullanici Organizator)
         {
             Console.Write("Etkinlik adı : ");
             string name = Console.ReadLine();
@@ -122,7 +125,7 @@ namespace TechEvent.Concrete
 
             try
             {
-                user.OrganizatorKullanicisiIcinEtkinlikOlustur(name, date, city, description, count, answer == 'E');
+                Organizator.EtkinlikOLustur(name, date, city, description, count, answer == 'E');
             }
             catch (Exception ex)
             {
@@ -162,7 +165,7 @@ namespace TechEvent.Concrete
             string user = Console.ReadLine();
             Console.Write("Şifre : ");
             string password = Console.ReadLine();
-            Console.Write("Organizatör için 1'e, diğer için 2'ye basın");
+            Console.Write("Organizatör için 1'e,  Kullanıcı için 2'ye basın");
             int type = int.Parse(Console.ReadLine());
 
             try
@@ -187,5 +190,35 @@ namespace TechEvent.Concrete
             }
         }
 
+        public void OrnekEtkinlik(Katilimci katilimci)
+        {
+
+            Etkinlik etkinlik1 = new Etkinlik();
+            etkinlik1.EtkinlikAdi = "Konser";
+            etkinlik1.EtkinlikTarihi = DateTime.Parse("2022,11,25");
+            etkinlik1.EtkinliginOlduguSehir = "İstanbul";
+            etkinlik1.Aciklama = "Müslüm Gürses anısına";
+            Console.WriteLine("1.Etkinlik ");
+            Console.WriteLine
+                ("Etkinlik Adı: " + etkinlik1.EtkinlikAdi
+                + "\nEtkinlik Tarihi :" + etkinlik1.EtkinlikTarihi
+                + "\nEtkinliğin olacağı şehir: " + etkinlik1.EtkinliginOlduguSehir
+                + "\nEtkinlik Açıklması: " + etkinlik1.Aciklama);
+
+            Console.WriteLine("2.Etkinlik ");
+            Etkinlik etkinlik2 = new Etkinlik();
+            etkinlik2.EtkinlikAdi = "Anıtkabir";
+            etkinlik2.EtkinlikTarihi = DateTime.Parse("2022,12,21");
+            etkinlik2.EtkinliginOlduguSehir = "Ankara";
+            etkinlik2.Aciklama = "Atamıza ziyaret düzenlenecektir";
+
+            Console.WriteLine
+                ("Etkinlik Adı: " + etkinlik2.EtkinlikAdi
+                + "\n Etkinlik Tarihi :" + etkinlik2.EtkinlikTarihi
+                + "\n Etkinliğin olacağı şehir: " + etkinlik2.EtkinliginOlduguSehir
+                + "\nEtkinlik Açıklması: " + etkinlik2.Aciklama);
+
+
+        }
     }
 }

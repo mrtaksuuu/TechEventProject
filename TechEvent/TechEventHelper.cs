@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using TechEvent.Concrete;
 
-namespace TechEvent.Concrete
+namespace TechEvent
 {
     public static class TechEventHelper
     {

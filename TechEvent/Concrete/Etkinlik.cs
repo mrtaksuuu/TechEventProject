@@ -6,20 +6,6 @@ namespace TechEvent.Concrete
 {
     public class Etkinlik
     {
-        public Etkinlik(string etkinlikAdi, DateTime etkinlikTarihi, string etkinliginOlduguSehir, string aciklama, int katilacakKisiSayisi, bool biletliMi)
-        {
-            EtkinlikSehriniKontrolEt(etkinliginOlduguSehir);
-            EtkinlikTarihiKontrolEt(etkinlikTarihi);
-            KisiSayisiniKontrolEt(katilacakKisiSayisi);
-
-            EtkinlikAdi = etkinlikAdi;
-            EtkinlikTarihi = etkinlikTarihi;
-            EtkinliginOlduguSehir = etkinliginOlduguSehir;
-            Aciklama = aciklama;
-            KatilacakKisiSayisi = katilacakKisiSayisi;
-            BiletliMi = biletliMi;
-            KatilacakKisiler = new List<TechEventKullanici>();
-        }
 
         public string EtkinlikAdi { get; set; }
         public DateTime EtkinlikTarihi { get; set; }
@@ -27,7 +13,7 @@ namespace TechEvent.Concrete
         public string Aciklama { get; set; }
         public int KatilacakKisiSayisi { get; set; }
         public bool BiletliMi { get; set; }
-        public List<TechEventKullanici> KatilacakKisiler { get; set; }
+        public List<Katilimci> KatilacakKisiler { get; set; }
 
         void EtkinlikTarihiKontrolEt(DateTime dateTime)
         {
@@ -44,6 +30,8 @@ namespace TechEvent.Concrete
             {
                 throw new Exception("Şu an için İstanbul,Ankara ve İzmir'de etkinlik düzenlenebilir");
             }
+            else
+                Console.WriteLine("Etkinlik için uygun şehir");
         }
 
         void KisiSayisiniKontrolEt(int sayi)

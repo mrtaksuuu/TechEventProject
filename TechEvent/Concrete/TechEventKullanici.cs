@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace TechEvent.Concrete
 {
     public class TechEventKullanici
     {
-        public string ad;
-        public string soyad;
-        public string kAdi;
-        public string sifre;
-        public int tip; // 1 olursa organizatör, 2 olursa bilet satın alacak kullanıcı
+        public string ad { get; set; }
+        public string soyad { get; set; }
+        public string kAdi { get; set; }
+        public string sifre { get; set; }
+        public int tip { get; set; } // 1 olursa organizatör, 2 olursa bilet satın alacak kullanıcı
 
 
         public bool Kaydol(string ad, string soyad, string kAdi, string sifre, int tip)
@@ -49,37 +48,7 @@ namespace TechEvent.Concrete
             return false;
         }
 
-        public void HesapKapatma(string kullanici, List<TechEventKullanici> kullaniciListesi)
-        {
-            // Hata veriyor, düzeltilecek
-            //foreach (TechEventKullanici item in kullaniciListesi)
-            //{
-            //    if (item.kAdi == kullanici)
-            //    {
-            //        kullaniciListesi.Remove(item);
-            //    }
-            //}
-        }
 
-        public void OrganizatorKullanicisiIcinEtkinlikOlustur(string etkinlikAdi, DateTime etkinlikTarihi, string etkinliginOlduguSehir, string aciklama, int katilacakKisiSayisi, bool biletliMi)
-        {
-            if (tip == 1)
-            {
-                try
-                {
-                    Etkinlik etkinlik = new Etkinlik(etkinlikAdi, etkinlikTarihi, etkinliginOlduguSehir, aciklama, katilacakKisiSayisi, biletliMi);
-                    TechEventHelper.etkinlikListesi.Add(etkinlik);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            else
-            {
-                throw new Exception("Sadece organizatör rolündeki kullanıcılar etkinlik oluşturabilir");
-            }
-        }
 
         public void BirEtkinligeKatilma(Etkinlik etkinlik)
         {
@@ -87,7 +56,7 @@ namespace TechEvent.Concrete
             {
                 if (etkinlik.KatilacakKisiler.Count < etkinlik.KatilacakKisiSayisi)
                 {
-                    etkinlik.KatilacakKisiler.Add(this);
+                    etkinlik.KatilacakKisiler.Add((Katilimci)this);
                 }
                 else
                 {
@@ -115,6 +84,11 @@ namespace TechEvent.Concrete
             {
                 Console.WriteLine($"{firma.FirmaAdi} -> {firma.WebSitesi}");
             });
+        }
+
+        public void EtkinlikOLustur(string name, DateTime date, string city, string description, int count, bool v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
